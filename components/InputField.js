@@ -6,6 +6,9 @@ export default function InputField({
   icon,
   inputType,
   keyboardType,
+  rightIcon,
+  fieldButtonFunction,
+  passwordVisibility,
   onChangeText
 })
 {
@@ -24,7 +27,7 @@ export default function InputField({
           placeholder={label}
           keyboardType={keyboardType}
           style={{ flex: 1, paddingVertical: 0 }}
-          secureTextEntry={true}
+          secureTextEntry={!passwordVisibility}
           onChangeText={onChangeText}
         />
       ) : (
@@ -35,6 +38,9 @@ export default function InputField({
           style={{ flex: 1, paddingVertical: 0 }}
         />
       )}
+      <TouchableOpacity onPress={fieldButtonFunction}>
+        {rightIcon}
+      </TouchableOpacity>
     </View>
   );
 }

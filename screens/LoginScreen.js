@@ -17,6 +17,20 @@ const LoginScreen = () =>
 {
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
+  const [rightIcon, setRightIcon] = useState('visibility');
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const handlePasswordVisibility = () =>
+  {
+    if (rightIcon === 'visibility')
+    {
+      setRightIcon('visibility-off');
+      setPasswordVisibility(!passwordVisibility);
+    } else if (rightIcon === 'visibility-off')
+    {
+      setRightIcon('visibility');
+      setPasswordVisibility(!passwordVisibility);
+    }
+  }
   const SubmitLogin = () =>
   {
     if (!userName || !password)
@@ -45,10 +59,11 @@ const LoginScreen = () =>
   return (
     <SafeAreaView style={{ flex: 1, alignItems: 'center', flexDirection: "column", alignContent: "space-between" }}>
 
-      <View style={{ flex: 3, alignItems: 'center' }}>
+      <View style={{ flex: 3, alignContent: "center", justifyContent: "center" }}>
         <Image source={LoginImg} style={{
-          resizeMode: "center", height: 400,
-          width: 300
+          resizeMode: "center",
+          height: 400,
+          with: 300
         }} />
       </View>
 
@@ -78,6 +93,16 @@ const LoginScreen = () =>
           }
           onChangeText={(password) => setPassword(password)}
           inputType="password"
+          rightIcon={
+            <MaterialIcons
+              name={rightIcon}
+              size={20}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />
+          }
+          passwordVisibility={passwordVisibility}
+          fieldButtonFunction={handlePasswordVisibility}
         />
 
         <CustomButton label={"Login"} onPress={SubmitLogin} />
@@ -94,7 +119,7 @@ const LoginScreen = () =>
           <Text style={{ fontSize: 20, color: "#1e74b9" }}>Part of the Dream</Text>
         </View>
       </View>
-    </SafeAreaView>
+    </SafeAreaView >
   )
 }
 
